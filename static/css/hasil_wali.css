@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Konten utama akan mendorong footer ke bawah */
+.content-wrapper {
+    flex: 1;
+}
+
+.navbar-custom {
+    background: linear-gradient(135deg, #346739, #2a5a2e);
+    padding: 1rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    color: white !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.result-card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+}
+
+.result-header {
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.student-item {
+    background: #f9fafb;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.student-item:hover {
+    background: #f3f4f6;
+    transform: translateX(5px);
+}
+
+.student-name {
+    font-weight: 600;
+    color: #346739;
+    margin-bottom: 0.25rem;
+}
+
+.student-info {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.btn-view {
+    background: #346739;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.btn-view:hover {
+    background: #2a5a2e;
+    transform: translateY(-2px);
+}
+
+.btn-back {
+    background: #6b7280;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+    background: #4b5563;
+}
+
+.footer {
+    background: #1f2937;
+    color: #9ca3af;
+    text-align: center;
+    padding: 2rem;
+    margin-top: auto;  /* Kunci utama: auto margin di atas */
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .result-card {
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+    
+    .student-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .btn-view, .btn-back {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+}

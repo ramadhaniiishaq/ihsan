@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Laporan Filtered{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card-modern p-4">
+                <h4><i class="bi bi-file-text"></i> Hasil Filter Laporan</h4>
+                <a href="{{ url_for('laporan') }}" class="btn btn-secondary mb-3">
+                    <i class="bi bi-arrow-left"></i> Kembali
+                </a>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>Sholat</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for absen in absensi %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ absen.tanggal }}</td>
+                                <td>{{ absen.nama_siswa }}</td>
+                                <td>{{ absen.nama_kelas }}</td>
+                                <td>{{ absen.nama_sholat }}</td>
+                                <td>
+                                    {% if absen.status == 'sholat' %}
+                                    <span class="badge bg-success">Sholat</span>
+                                    {% elif absen.status == 'halangan' %}
+                                    <span class="badge bg-warning">halangan</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">Tidak Sholat</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center">Tidak ada data</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

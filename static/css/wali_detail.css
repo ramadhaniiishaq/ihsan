@@ -1,0 +1,228 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            min-height: 100vh;
+        }
+
+        .navbar-custom {
+            background: linear-gradient(135deg, #346739, #2a5a2e);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        /* Cards */
+        .card-modern {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card-modern:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Student Header */
+        .student-header {
+            background: linear-gradient(135deg, #346739, #79AE6F);
+            color: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .student-avatar {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .student-avatar i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .student-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Stat Cards */
+        .stat-card {
+            text-align: center;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+
+        .text-success-custom { color: #10b981; }
+        .text-warning-custom { color: #f59e0b; }
+        .text-danger-custom { color: #ef4444; }
+
+        /* Prayer Table */
+        .prayer-table {
+            width: 100%;
+        }
+
+        .prayer-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .prayer-item:last-child {
+            border-bottom: none;
+        }
+
+        .prayer-name {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-hadir {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-halangan {
+            background: #fed7aa;
+            color: #92400e;
+        }
+
+        .status-tidak {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-belum {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        /* Table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-custom th {
+            text-align: left;
+            padding: 0.75rem;
+            background: #f9fafb;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .table-custom td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.875rem;
+        }
+
+        /* Progress Bar */
+        .progress-custom {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-custom {
+            height: 100%;
+            background: #10b981;
+            border-radius: 1rem;
+            transition: width 0.3s ease;
+        }
+
+        .btn-back {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background: #4b5563;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            background: #1f2937;
+            color: #9ca3af;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .card-modern {
+                padding: 1rem;
+            }
+            
+            .student-header {
+                padding: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .prayer-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+        }

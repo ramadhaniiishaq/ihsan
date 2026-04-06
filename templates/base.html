@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>{% block title %}Sistem Absensi Sholat{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% if session.logged_in %}
+    <!-- Modern Sidebar -->
+    <div class="sidebar-modern" id="modernSidebar">
+        <div class="expand-btn" id="expandCollapseBtn">
+            <i class="bi bi-chevron-left"></i>
+        </div>
+        
+        <div class="sidebar-header">
+            <div class="logo-wrapper">
+                <div class="logo-icon">
+                    <i class="bi bi-moon-stars-fill"></i>
+                </div>
+            </div>
+            <h3>Ihsan</h3>
+            <p>Sistem Absensi Sholat</p>
+        </div>
+        
+        <div class="nav-menu">
+            <div class="nav-item-custom">
+                <a href="{{ url_for('dashboard') }}" class="nav-link-modern {% if request.endpoint == 'dashboard' %}active{% endif %}">
+                    <i class="bi bi-grid-3x3-gap-fill"></i>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+            
+            <div class="nav-item-custom">
+                <a href="{{ url_for('absensi') }}" class="nav-link-modern {% if request.endpoint == 'absensi' %}active{% endif %}">
+                    <i class="bi bi-check2-circle"></i>
+                    <span>Absensi Hari Ini</span>
+                    {% if today_absensi_count %}
+                    <span class="nav-badge">{{ today_absensi_count }}</span>
+                    {% endif %}
+                </a>
+            </div>
+            
+            <div class="nav-item-custom">
+                <a href="{{ url_for('siswa') }}" class="nav-link-modern {% if request.endpoint == 'siswa' %}active{% endif %}">
+                    <i class="bi bi-people-fill"></i>
+                    <span>Data Siswa</span>
+                </a>
+            </div>
+            
+            <div class="nav-item-custom">
+                <a href="{{ url_for('kelas') }}" class="nav-link-modern {% if request.endpoint == 'kelas' %}active{% endif %}">
+                    <i class="bi bi-building"></i>
+                    <span>Data Kelas</span>
+                </a>
+            </div>
+            
+            <div class="nav-item-custom">
+                <a href="{{ url_for('laporan') }}" class="nav-link-modern {% if request.endpoint == 'laporan' %}active{% endif %}">
+                    <i class="bi bi-graph-up"></i>
+                    <span>Laporan</span>
+                </a>
+            </div>
+            
+            <div class="nav-item-custom">
+                <a href="{{ url_for('profile') }}" class="nav-link-modern {% if request.endpoint == 'profile' %}active{% endif %}">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="user-details">
+                    <p class="username">{{ session.username }}</p>
+                    <p class="role">Administrator</p>
+                </div>
+            </div>
+            
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Mobile Toggle Button -->
+    <button class="sidebar-toggle" id="mobileSidebarToggle">
+        <i class="bi bi-list"></i>
+    </button>
+    {% endif %}
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-flash alert-dismissible fade show" role="alert">
+                        <i class="bi bi-{{ 'check-circle' if category == 'success' else 'exclamation-triangle' if category == 'danger' else 'info-circle' }}"></i>
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mobile sidebar toggle
+        const mobileToggle = document.getElementById('mobileSidebarToggle');
+        const sidebar = document.getElementById('modernSidebar');
+        
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('show-mobile');
+            });
+        }
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 768 && sidebar.classList.contains('show-mobile')) {
+                if (!sidebar.contains(event.target) && event.target !== mobileToggle) {
+                    sidebar.classList.remove('show-mobile');
+                }
+            }
+        });
+        
+        // Expand/Collapse sidebar (Desktop only)
+        const expandBtn = document.getElementById('expandCollapseBtn');
+        if (expandBtn && window.innerWidth > 768) {
+            let isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+            
+            if (isCollapsed) {
+                sidebar.classList.add('collapsed');
+                expandBtn.innerHTML = '<i class="bi bi-chevron-right"></i>';
+            }
+            
+            expandBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                const collapsed = sidebar.classList.contains('collapsed');
+                localStorage.setItem('sidebarCollapsed', collapsed);
+                
+                if (collapsed) {
+                    expandBtn.innerHTML = '<i class="bi bi-chevron-right"></i>';
+                } else {
+                    expandBtn.innerHTML = '<i class="bi bi-chevron-left"></i>';
+                }
+            });
+        }
+        
+        // Auto hide alerts after 4 seconds
+        setTimeout(() => {
+            document.querySelectorAll('.alert-flash').forEach(alert => {
+                const bsAlert = new bootstrap.Alert(alert);
+                setTimeout(() => bsAlert.close(), 500);
+            });
+        }, 4000);
+        
+        // Add active class to current nav item based on URL
+        const currentPath = window.location.pathname;
+        document.querySelectorAll('.nav-link-modern').forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('active');
+            }
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

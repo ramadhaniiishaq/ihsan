@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Absensi Sholat Hari Ini{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card-modern p-4">
+                <h3><i class="bi bi-check2-circle"></i> Form Absensi Sholat</h3>
+                <p class="text-muted">Tanggal: {{ today_date.strftime('%d/%m/%Y') }}</p>
+                
+                <form method="POST">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Pilih Siswa</label>
+                            <select name="siswa_id" class="form-select" required>
+                                <option value="">-- Pilih Siswa --</option>
+                                {% for siswa in siswa_list %}
+                                <option value="{{ siswa.id_siswa }}">{{ siswa.nama_siswa }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <label class="form-label">Pilih Sholat</label>
+                            <select name="sholat_id" class="form-select" required>
+                                <option value="">-- Pilih Sholat --</option>
+                                {% for sholat in sholat_list %}
+                                <option value="{{ sholat.id_sholat }}">{{ sholat.nama_sholat }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <label class="form-label">Status</label>
+                            <select name="status" class="form-select" required>
+                                <option value="sholat">Sholat</option>
+                                <option value="halangan">Halangan</option>
+                                <option value="tidak_sholat">Tidak Sholat</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <label class="form-label">Tanggal</label>
+                            <input type="date" name="tanggal" class="form-control" value="{{ today_date }}" required>
+                        </div>
+                        
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary-custom">
+                                <i class="bi bi-save"></i> Simpan Absensi
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card-modern p-4">
+                <h4><i class="bi bi-list-check"></i> Data Absensi Hari Ini</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>Sholat</th>
+                                <th>Status</th>
+                                <th>Tanggal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for absen in today_absensi %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ absen.nama_siswa }}</td>
+                                <td>{{ absen.nama_kelas }}</td>
+                                <td>{{ absen.nama_sholat }}</td>
+                                <td>
+                                    {% if absen.status == 'sholat' %}
+                                    <span class="badge bg-success">Sholat</span>
+                                    {% elif absen.status == 'halangan' %}
+                                    <span class="badge bg-warning">halangan</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">Tidak Sholat</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ absen.tanggal }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center">Belum ada data absensi hari ini</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

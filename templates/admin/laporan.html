@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Laporan Absensi{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card-modern p-4">
+                <h3><i class="bi bi-funnel"></i> Filter Laporan</h3>
+                <form method="POST" action="{{ url_for('filter_laporan') }}" class="row g-3">
+                    <div class="col-md-3">
+                        <label>Tanggal Mulai</label>
+                        <input type="date" name="tanggal_mulai" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label>Tanggal Akhir</label>
+                        <input type="date" name="tanggal_akhir" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label>Kelas</label>
+                        <select name="id_kelas" class="form-select">
+                            <option value="">Semua Kelas</option>
+                            {% for kelas in kelas_list %}
+                            <option value="{{ kelas.id_kelas }}">{{ kelas.nama_kelas }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Sholat</label>
+                        <select name="id_sholat" class="form-select">
+                            <option value="">Semua Sholat</option>
+                            {% for sholat in sholat_list %}
+                            <option value="{{ sholat.id_sholat }}">{{ sholat.nama_sholat }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary-custom">
+                            <i class="bi bi-search"></i> Tampilkan Laporan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card-modern p-4">
+                <h4><i class="bi bi-file-text"></i> Semua Data Absensi</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="reportTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>Sholat</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for absen in all_absensi %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ absen.tanggal }}</td>
+                                <td>{{ absen.nama_siswa }}</td>
+                                <td>{{ absen.nama_kelas }}</td>
+                                <td>{{ absen.nama_sholat }}</td>
+                                <td>
+                                    {% if absen.status == 'sholat' %}
+                                    <span class="badge bg-success">Sholat</span>
+                                    {% elif absen.status == 'halangan' %}
+                                    <span class="badge bg-warning">Halangan</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">Tidak Sholat</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="text-center">Belum ada data absensi</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Optional: Add export to Excel functionality
+    function exportToExcel() {
+        var table = document.getElementById("reportTable");
+        var html = table.outerHTML;
+        var url = 'data:application/vnd.ms-excel,' + escape(html);
+        var link = document.createElement('a');
+        link.download = 'laporan_absensi.xls';
+        link.href = url;
+        link.click();
+    }
+</script>
+{% endblock %}

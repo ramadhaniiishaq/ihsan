@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Data Siswa{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card-modern p-4">
+                <h3><i class="bi bi-person-plus"></i> Tambah Siswa Baru</h3>
+                <form method="POST" class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Nama Siswa</label>
+                        <input type="text" name="nama_siswa" class="form-control" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">NIS</label>
+                        <input type="text" name="nis" class="form-control" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Kelas</label>
+                        <select name="id_kelas" class="form-select" required>
+                            <option value="">-- Pilih Kelas --</option>
+                            {% for kelas in kelas_list %}
+                            <option value="{{ kelas.id_kelas }}">{{ kelas.nama_kelas }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary-custom w-100">
+                            <i class="bi bi-save"></i> Simpan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card-modern p-4">
+                <h4><i class="bi bi-people-fill"></i> Daftar Siswa</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama Siswa</th>
+                                <th>NIS</th>
+                                <th>Kelas</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for siswa in siswa_list %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ siswa.nama_siswa }}</td>
+                                <td>{{ siswa.nis }}</td>
+                                <td>{{ siswa.nama_kelas }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ siswa.id_siswa }}">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </button>
+                                    <a href="{{ url_for('delete_siswa', id=siswa.id_siswa) }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus data ini?')">
+                                        <i class="bi bi-trash"></i> Hapus
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% for siswa in siswa_list %}
+<div class="modal fade" id="editModal{{ siswa.id_siswa }}" tabindex="-1" aria-labelledby="editModalLabel{{ siswa.id_siswa }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('edit_siswa', id=siswa.id_siswa) }}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel{{ siswa.id_siswa }}">
+                        <i class="bi bi-pencil-square"></i> Edit Siswa
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nama_siswa{{ siswa.id_siswa }}" class="form-label">Nama Siswa</label>
+                        <input type="text" name="nama_siswa" id="nama_siswa{{ siswa.id_siswa }}" class="form-control" value="{{ siswa.nama_siswa }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nis{{ siswa.id_siswa }}" class="form-label">NIS</label>
+                        <input type="text" name="nis" id="nis{{ siswa.id_siswa }}" class="form-control" value="{{ siswa.nis }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_kelas{{ siswa.id_siswa }}" class="form-label">Kelas</label>
+                        <select name="id_kelas" id="id_kelas{{ siswa.id_siswa }}" class="form-select" required>
+                            {% for kelas in kelas_list %}
+                            <option value="{{ kelas.id_kelas }}" {% if kelas.id_kelas == siswa.id_kelas %}selected{% endif %}>
+                                {{ kelas.nama_kelas }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Batal
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Simpan Perubahan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Absensi Sholat{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card-modern p-4" style="background: linear-gradient(135deg, var(--color-deep), var(--color-soft)); color: rgb(0, 0, 0);">
+                <h2><i class="bi bi-calendar-check"></i> Dashboard Absensi Sholat</h2>
+                <p class="mb-0">Selamat datang, {{ session.username }}! Hari ini {{ now.strftime('%A, %d %B %Y') if now else '' }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="card-modern p-3 text-center">
+                <i class="bi bi-people-fill" style="font-size: 2rem; color: var(--color-deep);"></i>
+                <h3 class="mt-2">{{ total_siswa }}</h3>
+                <p class="text-muted">Total Siswa</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card-modern p-3 text-center">
+                <i class="bi bi-building" style="font-size: 2rem; color: var(--color-deep);"></i>
+                <h3 class="mt-2">{{ total_kelas }}</h3>
+                <p class="text-muted">Total Kelas</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card-modern p-3 text-center">
+                <i class="bi bi-check2-circle" style="font-size: 2rem; color: var(--color-deep);"></i>
+                <h3 class="mt-2">{{ total_absensi }}</h3>
+                <p class="text-muted">Absensi Hari Ini</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card-modern p-4">
+                <h4><i class="bi bi-graph-up"></i> Statistik Absensi Hari Ini</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Sholat</th>
+                                <th>Hadir</th>
+                                <th>Terlambat</th>
+                                <th>Tidak Sholat</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in chart_data %}
+                            <tr>
+                                <td><strong>{{ data.nama_sholat }}</strong></td>
+                                <td class="text-success">{{ data.hadir or 0 }}</td>
+                                <td class="text-warning">{{ data.terlambat or 0 }}</td>
+                                <td class="text-danger">{{ data.tidak or 0 }}</td>
+                                <td>{{ (data.hadir or 0) + (data.terlambat or 0) + (data.tidak or 0) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Set current date for template
+    document.addEventListener('DOMContentLoaded', function() {
+        const now = new Date();
+        // You can pass this from backend if needed
+    });
+</script>
+{% endblock %}

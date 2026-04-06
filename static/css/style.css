@@ -1,0 +1,1046 @@
+/* ============================================
+   ISLAMIC MODERN CSS
+   Elegant, High Contrast, Islamic Nuance
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+    /* Islamic Color Palette */
+    --color-primary: #1a5f3e;
+    --color-primary-dark: #0e3d28;
+    --color-primary-light: #2d8b5e;
+    --color-secondary: #c9a03d;
+    --color-secondary-dark: #a07d2f;
+    --color-secondary-light: #dbb852;
+    --color-accent: #d4af37;
+    --color-gold: #f5c542;
+    
+    /* Neutral Colors - High Contrast */
+    --color-white: #ffffff;
+    --color-cream: #fef9e6;
+    --color-beige: #f5f0e1;
+    --color-gray-50: #fafaf9;
+    --color-gray-100: #f5f5f4;
+    --color-gray-200: #e5e5e4;
+    --color-gray-300: #d4d4d3;
+    --color-gray-400: #a3a3a2;
+    --color-gray-500: #737372;
+    --color-gray-600: #525251;
+    --color-gray-700: #3f3f3e;
+    --color-gray-800: #2a2a29;
+    --color-gray-900: #18181b;
+    
+    /* Semantic Colors */
+    --color-success: #059669;
+    --color-success-light: #d1fae5;
+    --color-warning: #d97706;
+    --color-warning-light: #fed7aa;
+    --color-danger: #dc2626;
+    --color-danger-light: #fee2e2;
+    --color-info: #0284c7;
+    --color-info-light: #e0f2fe;
+    
+    /* Islamic Patterns */
+    --pattern-mosque: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c9a03d' opacity='0.03'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E");
+    --pattern-arabic: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d4af37' opacity='0.02'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E");
+    
+    /* Shadows - Deep & Rich */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-gold: 0 0 15px rgba(197, 160, 61, 0.3);
+    --shadow-green: 0 0 15px rgba(26, 95, 62, 0.3);
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 4rem;
+    
+    /* Border Radius - Soft & Elegant */
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.25rem;
+    --radius-2xl: 1.5rem;
+    --radius-3xl: 2rem;
+    --radius-full: 9999px;
+    
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 350ms ease;
+    
+    /* Layout */
+    --sidebar-width: 280px;
+    --header-height: 70px;
+    --content-max-width: 1400px;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f0f4e8 0%, #e8eddf 100%);
+    color: var(--color-gray-800);
+    line-height: 1.5;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Islamic Pattern Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--pattern-mosque), var(--pattern-arabic);
+    background-repeat: repeat;
+    background-size: 60px 60px, 80px 80px;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+/* Container */
+.container, .main-content {
+    position: relative;
+
+}
+
+/* ============================================
+   SIDEBAR - ISLAMIC ELEGANCE
+   ============================================ */
+
+.sidebar-modern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-width);
+    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    transition: transform var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    box-shadow: var(--shadow-2xl);
+    border-right: 2px solid var(--color-secondary);
+}
+
+.sidebar-modern::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar-modern::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-modern::-webkit-scrollbar-thumb {
+    background: var(--color-secondary);
+    border-radius: var(--radius-full);
+}
+
+/* Sidebar Header with Islamic Ornament */
+.sidebar-header {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    text-align: center;
+    border-bottom: 2px solid var(--color-secondary);
+    position: relative;
+}
+
+.sidebar-header::after {
+    content: '۞';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    font-size: 1.2rem;
+    padding: 0 8px;
+}
+
+.logo-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--color-gold), var(--color-secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto  var(--spacing-md);
+    box-shadow: var(--shadow-gold);
+    animation: gentlePulse 2s ease-in-out infinite;
+}
+
+@keyframes gentlePulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(197, 160, 61, 0.4);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 10px rgba(197, 160, 61, 0);
+    }
+}
+
+.logo-icon i {
+    font-size: 2.5rem;
+    color: var(--color-primary-dark);
+}
+
+.sidebar-header h3 {
+    color: var(--color-white);
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    letter-spacing: -0.3px;
+}
+
+.sidebar-header p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Navigation Items */
+.nav-menu {
+    flex: 1;
+    padding: var(--spacing-lg);
+}
+
+.nav-item-custom {
+    margin-bottom: var(--spacing-xs);
+}
+
+.nav-link-modern {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link-modern::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: var(--color-secondary);
+    transition: width var(--transition-base);
+
+}
+
+.nav-link-modern:hover::before {
+    width: 100%;
+}
+
+.nav-link-modern i {
+    font-size: 1.25rem;
+    width: 24px;
+    transition: transform var(--transition-base);
+}
+
+.nav-link-modern span {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.nav-link-modern:hover {
+    color: var(--color-white);
+    transform: translateX(5px);
+}
+
+.nav-link-modern:hover i {
+    transform: scale(1.1);
+}
+
+.nav-link-modern.active {
+    background: var(--color-secondary);
+    color: var(--color-primary-dark);
+    box-shadow: var(--shadow-md);
+}
+
+.nav-link-modern.active i {
+    color: var(--color-primary-dark);
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    padding: var(--spacing-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-md);
+    transition: var(--transition-base);
+}
+
+.user-info:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.user-avatar {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--color-gold), var(--color-secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.user-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    background: var(--color-success);
+    border-radius: 50%;
+    border: 2px solid var(--color-primary);
+}
+
+.user-avatar i {
+    color: var(--color-primary-dark);
+    font-size: 1.3rem;
+}
+
+.user-details {
+    flex: 1;
+}
+
+.user-details .username {
+    color: var(--color-white);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.user-details .role {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: rgba(220, 38, 38, 0.15);
+    border-radius: var(--radius-lg);
+    color: #fca5a5;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all var(--transition-base);
+}
+
+.logout-btn:hover {
+    background: rgba(220, 38, 38, 0.3);
+    color: #fecaca;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: var(--spacing-xl);
+    min-height: 100vh;
+    max-width: var(--content-max-width);
+}
+
+/* ============================================
+   CARDS - ISLAMIC DESIGN
+   ============================================ */
+
+.card-modern {
+    background: var(--color-white);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+    border: 1px solid rgba(197, 160, 61, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-secondary), var(--color-gold), var(--color-secondary));
+    transform: scaleX(0);
+    transition: transform var(--transition-base);
+}
+
+.card-modern:hover::before {
+    transform: scaleX(1);
+}
+
+.card-modern:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(197, 160, 61, 0.3);
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--color-secondary);
+    display: inline-block;
+    position: relative;
+}
+
+/* Stats Cards */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.stat-card {
+    background: linear-gradient(135deg, var(--color-white), var(--color-beige));
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+    border: 1px solid rgba(197, 160, 61, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::after {
+    content: '۞';
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: rgba(197, 160, 61, 0.1);
+    font-family: 'Amiri', serif;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--color-secondary);
+}
+
+.stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-gray-600);
+    margin-top: var(--spacing-sm);
+    letter-spacing: 0.3px;
+}
+
+/* Buttons - Islamic Style */
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+    color: var(--color-white);
+    border: none;
+    padding: 0.625rem 1.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary-custom::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary-custom:hover::before {
+    width: 200px;
+    height: 200px;
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-green);
+}
+
+/* Form Elements */
+.form-control, .form-select {
+    border: 2px solid var(--color-gray-200);
+    border-radius: var(--radius-lg);
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    transition: all var(--transition-base);
+    background: var(--color-white);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(197, 160, 61, 0.15);
+    outline: none;
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--color-gray-700);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Tables */
+.table-responsive {
+    overflow-x: auto;
+    border-radius: var(--radius-xl);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: left;
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-white);
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: none;
+}
+
+.table td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--color-gray-200);
+    font-size: 0.85rem;
+    color: var(--color-gray-700);
+}
+
+.table tr:hover td {
+    background: rgba(197, 160, 61, 0.05);
+}
+
+/* Badges - Islamic Colors */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.badge-success {
+    background: var(--color-success-light);
+    color: var(--color-success);
+}
+
+.badge-warning {
+    background: var(--color-warning-light);
+    color: var(--color-warning);
+}
+
+.badge-danger {
+    background: var(--color-danger-light);
+    color: var(--color-danger);
+}
+
+.badge-info {
+    background: var(--color-info-light);
+    color: var(--color-info);
+}
+
+/* Progress Bar - Islamic */
+.progress {
+    height: 10px;
+    background: var(--color-gray-200);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    border-radius: var(--radius-full);
+    transition: width 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Alerts */
+.alert-flash {
+    position: fixed;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    animation: slideInRight 0.3s ease;
+    max-width: 450px;
+    background: var(--color-white);
+    border-left: 4px solid;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.alert-success {
+    border-left-color: var(--color-success);
+}
+
+.alert-danger {
+    border-left-color: var(--color-danger);
+}
+
+.alert-warning {
+    border-left-color: var(--color-warning);
+}
+
+.alert-info {
+    border-left-color: var(--color-info);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Prayer Status Cards */
+.prayer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.prayer-item {
+    background: linear-gradient(135deg, var(--color-beige), var(--color-white));
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all var(--transition-base);
+    border: 1px solid rgba(197, 160, 61, 0.15);
+}
+
+.prayer-item:hover {
+    transform: translateX(5px);
+    border-color: var(--color-secondary);
+    box-shadow: var(--shadow-md);
+}
+
+.prayer-name {
+    font-weight: 700;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.prayer-name i {
+    color: var(--color-secondary);
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.status-hadir {
+    background: var(--color-success-light);
+    color: var(--color-success);
+}
+
+.status-terlambat {
+    background: var(--color-warning-light);
+    color: var(--color-warning);
+}
+
+.status-tidak {
+    background: var(--color-danger-light);
+    color: var(--color-danger);
+}
+
+.status-belum {
+    background: var(--color-gray-200);
+    color: var(--color-gray-600);
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+.sidebar-toggle {
+    position: fixed;
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    display: none;
+    transition: all var(--transition-base);
+}
+
+.sidebar-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Tablet & Mobile Styles */
+@media (max-width: 1024px) {
+    .sidebar-modern {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar-modern.show-mobile {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .sidebar-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 640px) {
+    :root {
+        --spacing-lg: 1rem;
+        --spacing-xl: 1.25rem;
+        --spacing-2xl: 1.5rem;
+    }
+    
+    .main-content {
+        padding: var(--spacing-md);
+    }
+    
+    .card-modern {
+        padding: var(--spacing-lg);
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .stat-grid {
+        gap: var(--spacing-md);
+    }
+    
+    .table th,
+    .table td {
+        padding: var(--spacing-sm);
+        font-size: 0.75rem;
+    }
+    
+    .alert-flash {
+        top: var(--spacing-md);
+        right: var(--spacing-md);
+        left: var(--spacing-md);
+        max-width: none;
+    }
+    
+    .prayer-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Landscape Mode */
+@media (max-width: 768px) and (orientation: landscape) {
+    .sidebar-modern {
+        overflow-y: auto;
+    }
+    
+    .sidebar-header {
+        padding: var(--spacing-md);
+    }
+    
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .logo-icon i {
+        font-size: 1.5rem;
+    }
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+.text-center { text-align: center; }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-danger { color: var(--color-danger); }
+.text-info { color: var(--color-info); }
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-muted { color: var(--color-gray-500); }
+
+.mt-1 { margin-top: var(--spacing-xs); }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-3 { margin-top: var(--spacing-md); }
+.mt-4 { margin-top: var(--spacing-lg); }
+.mb-1 { margin-bottom: var(--spacing-xs); }
+.mb-2 { margin-bottom: var(--spacing-sm); }
+.mb-3 { margin-bottom: var(--spacing-md); }
+.mb-4 { margin-bottom: var(--spacing-lg); }
+
+.d-flex { display: flex; }
+.align-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: var(--spacing-xs); }
+.gap-2 { gap: var(--spacing-sm); }
+.gap-3 { gap: var(--spacing-md); }
+
+.w-100 { width: 100%; }
+.h-100 { height: 100%; }
+
+/* Islamic Ornament Divider */
+.islamic-divider {
+    text-align: center;
+    margin: var(--spacing-lg) 0;
+    color: var(--color-secondary);
+    font-size: 1.2rem;
+    letter-spacing: 8px;
+}
+
+/* Arabic Text Style */
+.arabic-text {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    direction: rtl;
+}
+
+/* Loading Animation */
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--color-gray-200);
+    border-top-color: var(--color-secondary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Pastikan modal di atas semua */
+body.modal-open {
+    overflow: hidden;
+}
+/* ============================================
+   ADDITIONAL MODAL FIXES
+   ============================================ */
+
+/* Pastikan modal berfungsi dengan baik */
+.modal-open {
+    overflow: hidden !important;
+}
+
+.modal {
+    overflow-y: auto !important;
+    padding-right: 0 !important;
+}
+
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Fix untuk backdrop */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+}
+
+.modal-backdrop.fade {
+    opacity: 0;
+}
+
+.modal-backdrop.show {
+    opacity: 0.6;
+}
+
+/* Fix untuk konten modal */
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 0.5rem;
+    outline: 0;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+}
+
+/* Animasi modal yang lebih halus */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translate(0, -50px);
+}
+
+.modal.show .modal-dialog {
+    transform: translate(0, 0);
+}
+
+/* Pastikan modal tidak tertutup elemen lain */
+.modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+}
+
+/* Fix untuk tombol close */
+.btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: 0.25em 0.25em;
+    color: #000;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    border: 0;
+    border-radius: 0.375rem;
+    opacity: 0.5;
+}
+
+.btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Responsive modal */
+@media (max-width: 576px) {
+    .modal-dialog {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+    }
+    
+    .modal-content {
+        border-radius: 0.5rem;
+    }
+    
+    .modal-header {
+        padding: 0.75rem 1rem;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+    
+    .modal-footer {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Fix untuk sidebar saat modal terbuka di mobile */

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#346739">
+    <title>Pantau Absensi Anak - NurTrack</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/wali.css') }}" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('halaman_wali') }}">
+                <i class="bi bi-moon-stars-fill"></i> Ihsan
+            </a>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <div class="row g-4">
+            <!-- Left Side - Hero Section -->
+            <div class="col-lg-6">
+                <div class="hero-section ">
+                    <div class="hero-icon " > 
+                        <i class="bi bi-people-fill "></i>
+                    </div>
+                    <h1>Pantau Absensi Sholat Anak Anda</h1>
+                    <p>Dengan Ihsan, Anda dapat memantau kehadiran sholat 5 waktu anak Anda secara real-time dan mudah.</p>
+                    
+                    <ul class="feature-list">
+                        <li>
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span>Monitoring kehadiran sholat harian</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-graph-up"></i>
+                            <span>Statistik lengkap per bulan</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-bell-fill"></i>
+                            <span>Notifikasi keterlambatan</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-file-text-fill"></i>
+                            <span>Laporan rekap yang mudah dipahami</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Side - Admin Login & Search Card -->
+            <div class="col-lg-6">
+                <div class="right-panel">
+                    <!-- Admin Login Card -->
+                    <div class="admin-login-card" onclick="window.location.href='{{ url_for('login') }}'">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5><i class="bi bi-shield-lock"></i> Area Guru / Admin</h5>
+                                <p>Klik disini untuk login sebagai guru atau administrator</p>
+                            </div>
+                            <i class="bi bi-arrow-right-circle-fill"></i>
+                        </div>
+                    </div>
+
+                    <!-- Search Card -->
+                    <div class="search-card">
+                        <h3>
+                            <i class="bi bi-search"></i> Cari Data Siswa
+                        </h3>
+                        
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert-custom">
+                                        <i class="bi bi-exclamation-triangle-fill"></i>
+                                        <span>{{ message }}</span>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        
+                        <form method="POST" action="{{ url_for('wali_cari_siswa') }}">
+                            <div class="input-group-custom">
+                                <i class="bi bi-person input-icon"></i>
+                                <input type="text" 
+                                       name="nis" 
+                                       class="form-control-custom" 
+                                       placeholder="Masukkan Nis siswa..."
+                                       required
+                                       autofocus>
+                            </div>
+                            <button type="submit" class="btn-search">
+                                <i class="bi bi-search"></i> Cari Data
+                            </button>
+                        </form>
+                        
+                        <hr class="my-3">
+                        <div class="text-center">
+                            <small class="text-muted">
+                                <i class="bi bi-info-circle"></i> Masukkan nama lengkap siswa untuk melihat rekap absensi
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Info Cards -->
+                    <div class="row g-2 mt-3">
+                        <div class="col-4">
+                            <div class="info-card">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <h4>Monitoring Mudah</h4>
+                                <p>Cukup dengan nama anak</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="info-card">
+                                <i class="bi bi-graph-up"></i>
+                                <h4>Rekap Lengkap</h4>
+                                <p>Statistik per hari & bulan</p>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="info-card">
+                                <i class="bi bi-shield-check"></i>
+                                <h4>Data Real-time</h4>
+                                <p>Update setiap hari</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <p class="mb-0">
+                <i class="bi bi-moon-stars"></i> "Sholat lah sebelum jadi mayat 🗿"
+            </p>
+            <small>&copy; 2026 Ihsan - Sistem Informasi Absensi Sholat</small>
+        </div>
+    </div>
+
+    <script>
+        // Auto focus on page load
+        document.querySelector('input[name="nama_siswa"]').focus();
+    </script>
+</body>
+</html>
